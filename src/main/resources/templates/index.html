@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>ExamenPractico</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"/>
+        <h2>Listado de Estudiantes</h2>
+        <hr>
+        <a th:href="@{/estudiante/nuevo}">Nuevo Estudiante</a>
+        <div th:if="${estudiantes != null and !estudiantes.empty}">
+            <table border="0">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Correo</th>
+                        <th>Teléfono</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="estudiante: ${estudiantes}">
+                        <td>[[${estudiante.nombre}]]</td>
+                        <td>[[${estudiante.apellidos}]]</td>
+                        <td>[[${estudiante.correo}]]</td>
+                        <td>[[${estudiante.telefono}]]</td>
+                        <td>
+                            <a th:href="@{/estudiante/eliminar/} + ${estudiante.idEstudiante}">Eliminar</a>
+                            <a th:href="@{/estudiante/modificar/} + ${estudiante.idEstudiante}">Modificar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>       
+        </div>
+        
+        <div th:if="${estudiantes == null or estudiantes.empty}">
+            <h2>No tenemos estudiantes que mostrar</h2>
+        </div>
+        
+        <footer th:replace="layout/plantilla :: footer"/>
+    </body>
+</html>
+
+
+
+
+
+
+
